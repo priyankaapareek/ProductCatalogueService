@@ -1,9 +1,18 @@
 package com.priyanka.productcatalogservice.models;
 
-public class BaseModel {
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class BaseModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long creatdAt;
+    private Long createdAt;
 
     private Long lastupdateAt;
 
@@ -17,12 +26,12 @@ public class BaseModel {
         this.id = id;
     }
 
-    public Long getCreatdAt() {
-        return creatdAt;
+    public Long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatdAt(Long creatdAt) {
-        this.creatdAt = creatdAt;
+    public void setCreatedAt(Long creatdAt) {
+        this.createdAt = createdAt;
     }
 
     public Long getLastupdateAt() {

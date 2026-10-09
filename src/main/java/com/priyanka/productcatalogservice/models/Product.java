@@ -3,13 +3,20 @@ package com.priyanka.productcatalogservice.models;
 import com.priyanka.productcatalogservice.dtos.CategoryDTO;
 import com.priyanka.productcatalogservice.dtos.ExternalProductDTO;
 import com.priyanka.productcatalogservice.dtos.ProductDTO;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Product extends BaseModel {
     private String name;
     private String description;
     private Double price;
     private String imageUrl;
-  //  private Category category;
+
+    @ManyToOne (cascade = CascadeType.ALL)
+    private Category category;
+
 
     public ProductDTO toProductDto(){
         ProductDTO productDTO = new ProductDTO();
@@ -18,9 +25,12 @@ public class Product extends BaseModel {
         productDTO.setPrice(this.price);
         productDTO.setImageUrl(this.imageUrl);
 
-//        CategoryDTO categoryDTO = new CategoryDTO();
-//        categoryDTO.setName(this.category.getName());
-//        productDTO.setCategoryDTO(categoryDTO);
+        if (this.category != null) {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setName(this.category.getName());
+            categoryDTO.setDescription(this.category.getDescription());
+            productDTO.setCategoryDTO(categoryDTO);
+        }
 
         return productDTO;
     }
@@ -31,7 +41,7 @@ public class Product extends BaseModel {
         externalProductDTO.setDescription(this.description);
         externalProductDTO.setPrice(this.price);
         externalProductDTO.setImage(imageUrl);
-       // externalProductDTO.setCategory(this.category.getName());
+        externalProductDTO.setCategory(this.category.getName());
         return externalProductDTO;
 
 
@@ -69,12 +79,12 @@ public class Product extends BaseModel {
         this.imageUrl = imageUrl;
     }
 
-//    public Category getCategory() {
-//        return category;
-//    }
+    public Category getCategory() {
+        return category;
+    }
 
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }

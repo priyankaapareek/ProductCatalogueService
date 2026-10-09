@@ -9,7 +9,7 @@ public class ExternalProductDTO {
     private String description;
     private String image;
     private Double price;
-   // private String category;
+    private String category;
 
     public Product toProduct() {
         Product product = new Product();
@@ -19,9 +19,9 @@ public class ExternalProductDTO {
         product.setPrice(this.price);
         product.setImageUrl(this.image);
 
-//        Category category = new Category();
-//        category.setName(this.category);
-//        product.setCategory(category);
+        Category category = new Category();
+        category.setName(this.category);
+        product.setCategory(category);
 
         return product;
     }
@@ -66,13 +66,13 @@ public class ExternalProductDTO {
         this.price = price;
     }
 
-//    public String getCategory() {
-//        return category;
-//    }
+    public String getCategory() {
+        return category;
+    }
 
-//    public void setCategory(String category) {
-//        this.category = category;
-//    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
 
 }

@@ -18,15 +18,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("externalProductService")
 public class ExternalProductService implements IProductService {
 
     @Autowired
     private ExternalAPIClient externalAPIClient;
-
-
-
-    // fakestore api is down so replaced it with dummy json api now.. dummy json return a object while fakestore was returning an array.
 
     @Override
     public List<Product> getAllProducts() {
@@ -85,6 +81,11 @@ public class ExternalProductService implements IProductService {
         if(response.getBody() != null &&  response.getStatusCode().equals(HttpStatusCode.valueOf(200))) {
             return response.getBody().toProduct();
         }
+        return null;
+    }
+
+    @Override
+    public Boolean deleteProductById(Long id) {
         return null;
     }
 

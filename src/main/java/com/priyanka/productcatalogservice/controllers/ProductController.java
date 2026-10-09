@@ -5,6 +5,7 @@ import com.priyanka.productcatalogservice.exceptions.ProductNotExistException;
 import com.priyanka.productcatalogservice.models.Product;
 import com.priyanka.productcatalogservice.services.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
+    @Qualifier("storageProductService")
     private IProductService  productService;
 
     @GetMapping("/products")
@@ -50,6 +52,7 @@ public class ProductController {
     }
     @PostMapping("/products")
     public ProductDTO createProduct (@RequestBody ProductDTO productDTO) {
-        return null;
+        Product product = productDTO.toProduct();
+        return productService.createProduct(product).toProductDto();
     }
 }
